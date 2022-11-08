@@ -1,0 +1,16 @@
+services:
+  mysql:
+    container_name: mysql-bank-management
+    image: mysql:8.0.21
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - "8085:3306"
+    volumes:
+      - db:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: unless-stopped
+
+volumes:
+  db:
+    driver: local
