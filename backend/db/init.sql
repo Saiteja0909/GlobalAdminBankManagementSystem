@@ -1,16 +1,16 @@
 CREATE DATABASE bankdb;
 USE bankdb;
 create table customer (
-  id bigint not null,
-  primary key (id)
+  customerNo varchar(255) not null,
+  name varchar(255)
+  primary key (customerNo)
 ) engine=InnoDB;
-INSERT INTO customer(id)
+INSERT INTO customer(customerNo, name)
 values
-    (1234),
-    (4567),
-    (9876),
-    (6745),
-    (1290);
+    ("1","Prameet"),
+    ("2","Sai"),
+    ("3","Rahul");
+    
 create table admin (
                        username varchar(255) not null,
                        password varchar(255),

@@ -2,39 +2,44 @@ package com.wellsfargo.bankmanagement.api;
 
 import com.wellsfargo.bankmanagement.model.Branch;
 import com.wellsfargo.bankmanagement.service.BranchService;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import lombok.AllArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins="http://localhost:3000")
 @RestController
 @RequestMapping(path = "/api/v1/branches")
 @AllArgsConstructor
 public class BranchController {
+    @Autowired
     private final BranchService branchService;
 
     @PostMapping
-    public ResponseEntity createBranch(@RequestBody Branch branch) {
-        Branch newBranch = branchService.createBranch(branch);
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(newBranch);
+    public Branch createBranch(@RequestBody Branch branch) {
+    return branchService.createBranch(branch);
+        
     }
+  
 
     @GetMapping
     public List<Branch> getAllBranches() {
         return branchService.getAllBranches();
     }
 
-    @DeleteMapping("{branch-id}")
-    public ResponseEntity deleteBranch(@RequestParam("branch-id") String branchId) {
+    @GetMapping("/branchId")
+    public List<String> getAllBranchIds() {
+        return branchService.getAllBranchIds();
+    }
+
+    @DeleteMapping("{branchId}")
+    public boolean deleteBranch(@PathVariable String branchId) {
         boolean isBranchDeleted = branchService.deleteBranch(branchId);
-        return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .body(String.format("{error: unable to delete branch with " +
-                        "id {}\nreason: check whether branch exists with id {}",
-                        branchId, branchId));
+        return isBranchDeleted;
     }
 }

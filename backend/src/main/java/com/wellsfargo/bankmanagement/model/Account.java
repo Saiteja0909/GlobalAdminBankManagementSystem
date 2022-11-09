@@ -7,26 +7,29 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
+
 import java.util.Date;
 
 @Entity
 @Data
 @NoArgsConstructor @AllArgsConstructor
 @Builder
+@Table(name = "Account")
 public class Account {
     @Id
     private String accountNo;
     // todo: link customer table to account table (customer id -> customer No)
-    private Long customerNo;
+    private String customerNo;
     // todo: link branch table to account table (branch id -> branch id)
     private String branchId;
     private Long balance;
     private Date openingDate;
-    private AccountType type;
-    private AccountStatus status;
+    private String type;
+    private String status;
 
-    public enum AccountType {
-        SAVING("saving"),
+    /*public enum AccountType {
+        SAVING("savings"),
         CURRENT("current");
         private final String value;
 
@@ -42,5 +45,5 @@ public class Account {
         AccountStatus(String value) {
             this.value = value;
         }
-    }
+    }*/
 }

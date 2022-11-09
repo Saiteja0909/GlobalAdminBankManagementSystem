@@ -7,8 +7,4 @@ Content-Type: application/json
   "branchName": "branch1",
   "branchAddress": "delhi"
 }
-###
-POST http://localhost:8081/api/v1/accounts
-Content-Type: application.json
 
-{}
